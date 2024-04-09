@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple JavaScript Snake Game | Webdevtrick.com</title>
+    <style>
+        canvas {
+            display: block;
+            position: absolute;
+            border: 5px solid #009BFF;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var COLS = 26, ROWS = 26, EMPTY = 0, SNAKE = 1, FRUIT = 2,
+            LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3,
+            KEY_LEFT = 37, KEY_UP = 38, KEY_RIGHT = 39, KEY_DOWN = 40,
+            canvas, ctx, keystate, frames, score,
+            grid = {
+                width: null,
+                height: null,
+                _grid: null,
+                init: function (d, c, r) {
+                    this.width = c;
+                    this.height = r;
+                    this._grid = [];
+                    for (var x = 0; x < c; x++) {
+                        this._grid.push([]);
+                        for (var y = 0; y < r; y++) {
+                            this._grid[x].push(d);
+                        }
+                    }
+                },
+                set: function (val, x, y) {
+                    this._grid[x][y] = val;
+                },
+                get: function (x, y) {
+                    return this._grid[x][y];
+                }
+            },
+            snake = {
+                direction: null,
+                last: null,
+                _queue: null,
+                init: function (d, x, y) {
+                    this.direction = d;
+                    this._queue = [];
+                    this.insert(x, y);
+                },
+                insert: function (x, y) {
+                    this._queue.unshift({ x: x, y: y });
+                    this.last = this._queue[0];
+                },
+                remove: function () {
+                    return this._queue.pop();
+                }
+            };
+
+        // Rest of the game logic (update, draw, main, etc.) goes here...
+
+        // Call the main function to start the game
+        main();
+    </script>
+</body>
+</html>
